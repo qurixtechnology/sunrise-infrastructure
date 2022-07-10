@@ -17,5 +17,5 @@ variable "use_case" {
 
 variable "layer" {
   type    = string
-  default = "ingest"
+  default = "compute-transform"
 }

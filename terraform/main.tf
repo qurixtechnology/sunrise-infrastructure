@@ -82,6 +82,14 @@ module "base_layer" {
   storage_account_id  = module.storage_layer.storage_account_id
 }
 
+module "compute_transform" {
+  source              = "./compute_layer/transform"
+  use_case            = var.use_case
+  environment         = var.environment
+  resource_group_name = module.resource_group.rg_name
+  location            = var.location
+}
+
 # module compute_layer {}
 
 # module serve_layer {}
