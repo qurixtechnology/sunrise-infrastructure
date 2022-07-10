@@ -35,3 +35,4 @@ terraform.rc
 
 # Locals
 Makefile
+*_credentials.json
