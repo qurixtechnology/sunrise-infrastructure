@@ -1,5 +1,5 @@
 resource "azurerm_storage_account" "sa" {
-  name                      = "sa${var.environment}${var.layer}"
+  name                      = "sa${var.environment}${replace(var.layer, "-", "")}"
   resource_group_name       = var.resource_group_name
   location                  = var.location
   account_tier              = "Standard"
@@ -40,9 +40,10 @@ resource "azurerm_function_app" "function" {
   os_type                    = "linux"
   version                    = "~3"
 
-  app_settings = {
-    "FUNCTIONS_WORKER_RUNTIME"       = "Python"
-    "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.appinsights.instrumentation_key
+  tags = {
+    env      = var.environment
+    use_case = var.use_case
   }
+
 }
 
