@@ -1,5 +1,5 @@
 resource "azurerm_storage_account" "sa" {
-  name                      = "sa${var.environment}ingest"
+  name                      = "sa${var.environment}{var.layer}"
   resource_group_name       = var.resource_group_name
   location                  = var.location
   account_tier              = "Standard"
@@ -10,7 +10,7 @@ resource "azurerm_storage_account" "sa" {
 }
 
 resource "azurerm_app_service_plan" "asp" {
-  name                = "asp-${var.environment}-transform-${var.use_case}"
+  name                = "asp-${var.environment}-${var.layer}-${var.use_case}"
   resource_group_name = var.resource_group_name
   location            = var.location
   kind                = "functionapp"
@@ -23,14 +23,14 @@ resource "azurerm_app_service_plan" "asp" {
 }
 
 resource "azurerm_application_insights" "appinsights" {
-  name                = "appi-${var.environment}-transform-${var.use_case}"
+  name                = "appi-${var.environment}-${var.layer}-${var.use_case}"
   resource_group_name = var.resource_group_name
   location            = var.location
   application_type    = "web"
 }
 
 resource "azurerm_function_app" "function" {
-  name                       = "func-${var.environment}-transform-${var.use_case}"
+  name                       = "func-${var.environment}-${var.layer}-${var.use_case}"
   resource_group_name        = var.resource_group_name
   location                   = var.location
   app_service_plan_id        = azurerm_app_service_plan.asp.id

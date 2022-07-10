@@ -14,3 +14,8 @@ variable "location" {
 variable "use_case" {
   type = string
 }
+
+variable "layer" {
+  type = string
+  default = "compute-transform"
+}
