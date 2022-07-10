@@ -45,3 +45,4 @@ resource "azurerm_function_app" "function" {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.appinsights.instrumentation_key
   }
 }
+
